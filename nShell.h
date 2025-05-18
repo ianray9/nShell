@@ -1,5 +1,5 @@
-#ifndef N_SHELL
-#define N_SHELL
+#ifndef N_SHELL_H
+#define N_SHELL_H
 
 #define MAX_ARGS 1024
 
