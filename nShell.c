@@ -64,7 +64,7 @@ void execArgs(char **args) {
             perror("execvp");
             exit(EXIT_FAILURE);
         }
-    } else {
-        int waitResult = waitpid(childPID, &status, WUNTRACED);
+    } else if (waitpid(childPID, &status, WUNTRACED) == -1) {
+        perror("waitpid");
     }
 }
