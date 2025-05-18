@@ -6,4 +6,4 @@ run:
 	./nsh
 
 clean:
-	rm nsh
+	rm nsh nShell.o
