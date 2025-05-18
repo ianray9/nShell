@@ -10,7 +10,7 @@
 
 // Tokenize line and add tokens to string array args
 // ASSERT: line != NULL
-void tokenizeLine(char *line, char **args, const size_t BUFFER_SIZE) {
+void tokenizeLine(char *line, char **args) {
     char *token;
     size_t numTokens = 0;
 

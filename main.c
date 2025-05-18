@@ -25,7 +25,7 @@ int main() {
 
         // Tokenize lineIn
         char **args = malloc(MAX_ARGS * sizeof(char *));
-        tokenizeLine(lineIn, args, lineBuffSize);
+        tokenizeLine(lineIn, args);
 
         execArgs(args);
 
