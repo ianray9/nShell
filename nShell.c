@@ -28,16 +28,18 @@ void tokenizeLine(char *line, char **args) {
 // ASSERT: args != NULL
 void execArgs(char **args) {
     pid_t childPID = fork();
-    int status;
 
     if (childPID == 0) {
-        int code = execvp(args[0], args);
-
-        if (code == -1) {
+        if (execvp(args[0], args) == -1) {
             perror("execvp");
             exit(EXIT_FAILURE);
         }
-    } else if (waitpid(childPID, &status, WUNTRACED) == -1) {
-        perror("waitpid");
+    } else {
+        int status;
+
+        if (waitpid(childPID, &status, WUNTRACED) == -1) {
+            perror("waitpid");
+            exit(EXIT_FAILURE);
+        }
     }
 }
