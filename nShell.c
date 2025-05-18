@@ -60,8 +60,10 @@ void execArgs(char **args) {
     if (childPID == 0) {
         int code = execvp(args[0], args);
 
-        if (code == -1)
+        if (code == -1) {
+            perror("execvp");
             exit(EXIT_FAILURE);
+        }
     } else {
         int waitResult = waitpid(childPID, &status, WUNTRACED);
     }
