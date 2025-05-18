@@ -9,8 +9,6 @@
 #include <unistd.h>
 
 int main() {
-    const size_t MAX_ARGS = 1024;
-
     size_t lineBuffSize = 256;
     char *lineIn = malloc(lineBuffSize * sizeof(char));
 
