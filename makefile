@@ -1,8 +1,8 @@
 build:
-	gcc --std=c99 nShell.c -o main -g
+	gcc --std=c99 nShell.c -o nsh -g
 
 run:
-	./main
+	./nsh
 
 clean:
-	rm main
+	rm nsh
