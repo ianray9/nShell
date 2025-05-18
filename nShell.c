@@ -14,10 +14,10 @@ void tokenizeLine(char *line, char **args) {
     char *token;
     size_t numTokens = 0;
 
-    token = strtok(line, " ");
+    token = strtok(line, " \t\n\r");
     while (token && numTokens < MAX_ARGS - 1) {
         args[numTokens++] = token;
-        token = strtok(NULL, " ");
+        token = strtok(NULL, " \t\n\r");
     }
 
     // Add null value at end for execvp
