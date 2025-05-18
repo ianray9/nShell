@@ -49,6 +49,9 @@ void tokenizeLine(char *line, char **args, const size_t BUFFER_SIZE) {
         args[numTokens++] = token;
         token = strtok(NULL, " ");
     }
+
+    // Add null value at end for execvp
+    args[numTokens] = NULL;
 }
 
 // Run command with arguments on child process
