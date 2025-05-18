@@ -29,6 +29,11 @@ void tokenizeLine(char *line, char **args) {
 void execArgs(char **args) {
     pid_t childPID = fork();
 
+    if (childPID < 0) {
+        perror("fork");
+        return;
+    }
+
     if (childPID == 0) {
         if (execvp(args[0], args) == -1) {
             perror("execvp");
