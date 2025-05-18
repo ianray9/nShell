@@ -15,7 +15,7 @@ void tokenizeLine(char *line, char **args) {
     size_t numTokens = 0;
 
     token = strtok(line, " ");
-    while (token) {
+    while (token && numTokens < MAX_ARGS - 1) {
         args[numTokens++] = token;
         token = strtok(NULL, " ");
     }
