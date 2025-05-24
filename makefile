@@ -1,9 +1,9 @@
 build:
-	gcc --std=c99 -c nShell.c -o nShell.o -g
-	gcc main.c nShell.o -o nsh
+	gcc --std=c99 -Werror -Wall -c nShell.c -o nShell.o -g
+	gcc --std=c99 -Werror -Wall main.c nShell.o -o nsh
 
 run:
 	./nsh
 
 clean:
-	rm nsh nShell.o
+	rm nsh
