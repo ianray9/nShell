@@ -8,8 +8,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 
-// Tokenize line and add tokens to string array args
-// ASSERT: line != NULL
 void tokenizeLine(char *line, char **args) {
     char *token;
     size_t numTokens = 0;
@@ -24,8 +22,6 @@ void tokenizeLine(char *line, char **args) {
     args[numTokens] = NULL;
 }
 
-// Run command with arguments on child process
-// ASSERT: args != NULL
 void execArgs(char **args) {
     pid_t childPID = fork();
 
