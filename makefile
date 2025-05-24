@@ -1,9 +1,25 @@
-build:
-	gcc --std=c99 -Werror -Wall -c src/nShell.c -o nShell.o -g
-	gcc --std=c99 -Werror -Wall src/main.c nShell.o -o nshell
+# Flags
+CFLAGS = --std=c99 -Wall -Wextra -Werror
 
-run:
-	./nsh
+# Files
+SRC = src/main.c src/nShell.c
+OBJ = build/main.o build/nShell.o
+BIN = bin/nshell
+
+all: $(BIN)
+
+# Compile nshell executable
+$(BIN): $(OBJ)
+	mkdir -p bin
+	$(CC) $(CFLAGS) -o $@ $^
+
+# Compile c src files to obj files
+build/%.o: src/%.c
+	mkdir -p build
+	$(CC) $(CFLAGS) -o $@ -c $<
+
+run: $(BIN)
+	./bin/nshell
 
 clean:
-	rm nshell nShell.o
+	$(RM) -r build bin
