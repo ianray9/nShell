@@ -2,6 +2,7 @@
 #define N_SHELL_H
 
 #define MAX_ARGS 1024
+#define DELIMS " \t\n\r"
 
 // Tokenize line and add tokens to string array args
 // ASSERT: line != NULL

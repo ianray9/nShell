@@ -1,6 +1,3 @@
-/*
- * REQS: C Standard >= C99
- */
 #include "nShell.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,7 +9,7 @@ void tokenizeLine(char *line, char **args) {
     char *token;
     size_t numTokens = 0;
 
-    token = strtok(line, " \t\n\r");
+    token = strtok(line, DELIMS);
     while (token && numTokens < MAX_ARGS - 1) {
         args[numTokens++] = token;
         token = strtok(NULL, " \t\n\r");
