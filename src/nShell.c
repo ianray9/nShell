@@ -1,0 +1,50 @@
+/*
+ * REQS: C Standard >= C99
+ */
+#include "nShell.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+// Tokenize line and add tokens to string array args
+// ASSERT: line != NULL
+void tokenizeLine(char *line, char **args) {
+    char *token;
+    size_t numTokens = 0;
+
+    token = strtok(line, " \t\n\r");
+    while (token && numTokens < MAX_ARGS - 1) {
+        args[numTokens++] = token;
+        token = strtok(NULL, " \t\n\r");
+    }
+
+    // Add null value at end for execvp
+    args[numTokens] = NULL;
+}
+
+// Run command with arguments on child process
+// ASSERT: args != NULL
+void execArgs(char **args) {
+    pid_t childPID = fork();
+
+    if (childPID < 0) {
+        perror("fork");
+        return;
+    }
+
+    if (childPID == 0) {
+        if (execvp(args[0], args) == -1) {
+            perror("execvp");
+            exit(EXIT_FAILURE);
+        }
+    } else {
+        int status;
+
+        if (waitpid(childPID, &status, WUNTRACED) == -1) {
+            perror("waitpid");
+            exit(EXIT_FAILURE);
+        }
+    }
+}
