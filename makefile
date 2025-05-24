@@ -1,5 +1,5 @@
 # Flags
-CFLAGS = --std=c99 -Wall -Wextra -Werror -Iinclude
+CFLAGS = -std=c99 -Wall -Wextra -Werror -Iinclude
 
 # Files
 SRC = src/main.c src/nShell.c
@@ -10,18 +10,18 @@ all: $(BIN)
 
 # Compile nshell executable
 $(BIN): $(OBJ)
-	mkdir -p bin
+	mkdir -p "bin"
 	$(CC) $(CFLAGS) -o $@ $^
 
 # Compile c src files to obj files
 build/%.o: src/%.c
-	mkdir -p build
+	mkdir -p "build"
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 run: $(BIN)
-	./bin/nshell
+	./$(BIN)
 
 clean:
-	$(RM) -r build bin
+	$(RM) -r "build" "bin"
 
 .PHONY: all run clean
