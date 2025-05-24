@@ -1,5 +1,5 @@
 # Flags
-CFLAGS = --std=c99 -Wall -Wextra -Werror
+CFLAGS = --std=c99 -Wall -Wextra -Werror -Iinclude
 
 # Files
 SRC = src/main.c src/nShell.c
