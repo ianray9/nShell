@@ -1,3 +1,2 @@
-nsh
-nsh.dSYM
-nShell.o
+build/
+bin/
