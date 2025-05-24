@@ -12,7 +12,7 @@ void tokenizeLine(char *line, char **args) {
     token = strtok(line, DELIMS);
     while (token && numTokens < MAX_ARGS - 1) {
         args[numTokens++] = token;
-        token = strtok(NULL, " \t\n\r");
+        token = strtok(NULL, DELIMS);
     }
 
     // Add null value at end for execvp
