@@ -23,3 +23,5 @@ run: $(BIN)
 
 clean:
 	$(RM) -r build bin
+
+.PHONY: all run clean
