@@ -1,3 +1,8 @@
+/*
+ * Nautilus Shell | Simple shell written in C
+ *
+ * REQS: C Standard >= C99
+ */
 #ifndef N_SHELL_H
 #define N_SHELL_H
 
