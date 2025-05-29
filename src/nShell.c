@@ -76,6 +76,11 @@ void execBuiltin(void (*builtinF)(char **args), char **args) {
 
 /* Builtins */
 void chWorkdir(char **args) {
+    if (args[1] == NULL) {
+        perror("Missing target directory");
+        return;
+    }
+
     int code = chdir(args[1]);
 
     // Check for error code
