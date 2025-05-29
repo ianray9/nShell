@@ -9,7 +9,7 @@
 /* Builtins */
 struct Builtin {
     void (*functPtr)(char **args);
-    char *alias;
+    const char *alias;
 };
 
 const size_t NUM_BUILTINS = 1;
@@ -17,6 +17,11 @@ const struct Builtin builtins[NUM_BUILTINS] = {
     {.functPtr = chWorkdir, .alias = "cd"}};
 
 void tokenizeLine(char *line, char **args) {
+    if (line == NULL || *line == '\0') {
+        args[0] = NULL;
+        return;
+    }
+
     char *token;
     size_t numTokens = 0;
 

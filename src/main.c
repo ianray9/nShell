@@ -1,6 +1,3 @@
-/*
- * REQS: C Standard >= C99
- */
 #include "nShell.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +24,8 @@ int main() {
         char **args = malloc(MAX_ARGS * sizeof(char *));
         tokenizeLine(lineIn, args);
 
-        execArgs(args);
+        if (args[0] != NULL)
+            execArgs(args);
 
         free(args);
         printf("@> ");
