@@ -5,10 +5,12 @@
 #define DELIMS " \t\n\r"
 
 // Tokenize line and add tokens to string array args
-// ASSERT: line != NULL
 void tokenizeLine(char *line, char **args);
 // Run command with arguments on child process
-// ASSERT: args != NULL
 void execArgs(char **args);
+// Run builtin function builtin with args
+void execBuiltin(void (*builtinF)(char **args), char **args);
+// Change current working directory to args[1]
+void chWorkdir(char **args);
 
 #endif
