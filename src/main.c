@@ -17,7 +17,7 @@ int main() {
 
     char **args = malloc(MAX_ARGS * sizeof(char *));
 
-    printf("@> ");
+    printf(PROMPT);
     while (getline(&lineIn, &lineBuffSize, stdin) != -1) {
         // Remove newline in lineIn
         lineIn[strcspn(lineIn, "\n")] = '\0';
@@ -28,7 +28,7 @@ int main() {
         if (args[0] != NULL)
             execArgs(args);
 
-        printf("@> ");
+        printf(PROMPT);
     }
 
     free(args);

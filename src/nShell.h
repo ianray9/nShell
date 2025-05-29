@@ -8,6 +8,7 @@
 
 #define MAX_ARGS 1024
 #define DELIMS " \t\n\r"
+#define PROMPT "@> "
 
 // Tokenize line and add tokens to string array args
 void tokenizeLine(char *line, char **args);
