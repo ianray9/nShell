@@ -15,22 +15,23 @@ int main() {
         return EXIT_FAILURE;
     }
 
+    char **args = malloc(MAX_ARGS * sizeof(char *));
+
     printf("@> ");
-    while (getline(&lineIn, &lineBuffSize, stdin)) {
+    while (getline(&lineIn, &lineBuffSize, stdin) != -1) {
         // Remove newline in lineIn
         lineIn[strcspn(lineIn, "\n")] = '\0';
 
         // Tokenize lineIn
-        char **args = malloc(MAX_ARGS * sizeof(char *));
         tokenizeLine(lineIn, args);
 
         if (args[0] != NULL)
             execArgs(args);
 
-        free(args);
         printf("@> ");
     }
 
+    free(args);
     free(lineIn);
 
     return EXIT_SUCCESS;
