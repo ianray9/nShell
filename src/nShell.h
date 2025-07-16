@@ -6,10 +6,14 @@
 #ifndef N_SHELL_H
 #define N_SHELL_H
 
+#include <stdio.h>
 #define MAX_ARGS 1024
 #define DELIMS " \t\n\r"
 #define PROMPT "@> "
+#define NUM_BUILTINS 1
 
+// Get user input line from stdin
+int getLine(char **line, size_t *len);
 // Tokenize line and add tokens to string array args
 void tokenizeLine(char *line, char **args);
 // Run command with arguments on child process

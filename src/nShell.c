@@ -12,9 +12,49 @@ struct Builtin {
     const char *alias;
 };
 
-const size_t NUM_BUILTINS = 1;
 const struct Builtin builtins[NUM_BUILTINS] = {
     {.functPtr = chWorkdir, .alias = "cd"}};
+
+int getLine(char **line, size_t *len) {
+    *len = 0;
+
+    size_t bufLen = 128;
+    char *buffer = (char *)malloc(bufLen * sizeof(char));
+
+    // Check for out of mem error
+    if (buffer == NULL) {
+        perror("malloc");
+        return EXIT_FAILURE;
+    }
+
+    char currChar = fgetc(stdin);
+    while (currChar != '\n' && currChar != EOF) {
+        buffer[(*len)++] = currChar;
+
+        // Increase buffer size if at limit
+        if (*len > bufLen - 1) {
+            bufLen *= 2;
+
+            char *tempBuf = realloc(buffer, bufLen);
+            if (!tempBuf) {
+                free(buffer);
+                perror("realloc");
+                return EXIT_FAILURE;
+            }
+            buffer = tempBuf;
+        }
+
+        currChar = fgetc(stdin);
+    }
+
+    buffer[(*len)++] = '\0';
+
+    *line = (char *)malloc(*len * sizeof(char));
+    strncpy(*line, buffer, *len);
+
+    free(buffer);
+    return (*len != 0) ? 0 : -1;
+}
 
 void tokenizeLine(char *line, char **args) {
     if (line == NULL || *line == '\0') {
@@ -62,7 +102,6 @@ void execArgs(char **args) {
         }
     } else {
         int status;
-
         if (waitpid(childPID, &status, WUNTRACED) == -1) {
             perror("waitpid");
             exit(EXIT_FAILURE);
@@ -70,9 +109,7 @@ void execArgs(char **args) {
     }
 }
 
-void execBuiltin(void (*builtinF)(char **args), char **args) {
-    builtinF(args);
-}
+void execBuiltin(void (*builtinF)(char **args), char **args) { builtinF(args); }
 
 /* Builtins */
 void chWorkdir(char **args) {
